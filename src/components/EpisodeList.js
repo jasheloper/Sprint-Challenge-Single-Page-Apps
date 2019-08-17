@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 export default function LocationsList() {
 
 
-    const [location, setLocation] = useState([]);
+    const [episode, setEpisode] = useState([]);
 
     useEffect(() => {
 
 
         Axios 
-            .get(`https://rickandmortyapi.com/api/location/`)
+            .get(`https://rickandmortyapi.com/api/episode/`)
             .then(response => {
 
-                setLocation(response.data)
-                console.log(response.data)
+                setEpisode(response.data.results)
+                console.log(response.data.results)
             })
 
             .catch(
@@ -23,10 +23,9 @@ export default function LocationsList() {
             }, [])
 
 
+            function Ep(obj) {
 
-            function Loc(obj) {
-
-                return <LocationCard
+                return <EpisodeCard
                   name={obj.name}
                   />
               }
@@ -35,10 +34,8 @@ export default function LocationsList() {
             
                 <div>
             
-                  {location.map(Loc)}
+                  {episode.map(Loc)}
                 </div>
             
               )
-
-  
 }
