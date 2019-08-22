@@ -1,44 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import LocationCard from './LocationCard';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
 
 export default function LocationsList() {
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    // TODO: Add AJAX/API Request here - must run in `useEffect`
+    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
+    axios
+      .get(`https://rickandmortyapi.com/api/location/`)
+      .then(res => {
+        console.log(res.data.results);
+        setData(res.data.results);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
-    const [location, setLocation] = useState([]);
-
-    useEffect(() => {
-
-
-        Axios 
-            .get(`https://rickandmortyapi.com/api/location/`)
-            .then(response => {
-
-                setLocation(response.data)
-                console.log(response.data)
-            })
-
-            .catch(
-                err => console.log(err)
-
-                )
-            }, [])
-
-
-
-            function Loc(obj) {
-
-                return <LocationCard
-                  name={obj.name}
-                  />
-              }
-            
-              return (
-            
-                <div>
-            
-                  {location.map(Loc)}
-                </div>
-            
-              )
-
-  
+  return (
+    <StyledDiv>
+      {data.map(obj => {
+        return <LocationCard key={obj.id} location={obj} />;
+      })}
+    </StyledDiv>
+  );
 }

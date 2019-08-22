@@ -1,24 +1,11 @@
-import React from "react";
+import React from 'react';
 
-export default function EpisodeCard(props) {
-  return  (
-
-
-    <div key={props.id}>
-
-    <p>
-    
-    <h2>Name: {props.name}</h2>
-    
-    </p>
-    
-    
+export default function CharacterCard(props) {
+    return (
+      <div>
+        <h2>Name: {props.episode.name}</h2>
+        <h3>Episode: {props.episode.episode}</h3>
+        <h3>Air Date: {props.episode.air_date}</h3>
       </div>
-      
-
-
-  )
-  
-  
-
-}
+    );
+  }
